@@ -1,0 +1,1897 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IQ CASINO</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --bg: #08080b;
+    --panel: rgba(18, 18, 23, .82);
+    --border: rgba(255, 255, 255, .09);
+
+    --text: #f5f5f7;
+    --muted: #858590;
+
+    --purple: #9b5cff;
+    --pink: #ff3ea5;
+    --cyan: #39e7ff;
+    --green: #54ff9b;
+    --red: #ff496c;
+    --yellow: #ffe66d;
+}
+
+html {
+    background: var(--bg);
+}
+
+body {
+    min-height: 100vh;
+    overflow-x: hidden;
+
+    font-family: Inter, Arial, sans-serif;
+    color: var(--text);
+
+    background:
+        radial-gradient(
+            circle at 10% 15%,
+            rgba(155, 92, 255, .18),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 90% 10%,
+            rgba(255, 62, 165, .13),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 50% 100%,
+            rgba(57, 231, 255, .09),
+            transparent 35%
+        ),
+        var(--bg);
+}
+
+/* Лёгкий движущийся фон */
+
+body::before {
+    content: "";
+
+    position: fixed;
+    inset: -100%;
+
+    pointer-events: none;
+
+    opacity: .055;
+
+    background:
+        repeating-linear-gradient(
+            115deg,
+            transparent 0 55px,
+            white 56px 57px
+        );
+
+    animation: backgroundMove 22s linear infinite;
+}
+
+@keyframes backgroundMove {
+    from {
+        transform: translate(0, 0);
+    }
+
+    to {
+        transform: translate(120px, 120px);
+    }
+}
+
+
+/* APP */
+
+.app {
+    position: relative;
+
+    width: min(1180px, calc(100% - 28px));
+
+    margin: 0 auto;
+
+    padding: 28px 0 50px;
+}
+
+
+/* HEADER */
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 18px;
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: 900;
+
+    letter-spacing: -1.5px;
+}
+
+.logo span {
+    color: var(--purple);
+}
+
+.logo small {
+    display: block;
+
+    margin-top: 3px;
+
+    color: var(--muted);
+
+    font-size: 8px;
+    font-weight: 600;
+
+    letter-spacing: 3px;
+}
+
+.balance {
+    padding: 10px 15px;
+
+    border: 1px solid var(--border);
+    border-radius: 15px;
+
+    background: rgba(255, 255, 255, .045);
+
+    backdrop-filter: blur(20px);
+
+    text-align: right;
+}
+
+.balance-label {
+    color: var(--muted);
+
+    font-size: 8px;
+    font-weight: 700;
+
+    letter-spacing: 2px;
+}
+
+.balance-value {
+    margin-top: 2px;
+
+    color: var(--yellow);
+
+    font-size: 20px;
+    font-weight: 900;
+}
+
+
+/* GRID */
+
+.grid {
+    display: grid;
+
+    grid-template-columns: minmax(0, 1fr) 310px;
+
+    gap: 18px;
+}
+
+
+/* CARDS */
+
+.card {
+    border: 1px solid var(--border);
+    border-radius: 24px;
+
+    background: var(--panel);
+
+    backdrop-filter: blur(30px);
+
+    box-shadow:
+        0 25px 80px rgba(0, 0, 0, .35);
+}
+
+
+/* FORTUNE */
+
+.fortune {
+    position: relative;
+
+    min-height: 600px;
+
+    padding: 28px;
+
+    overflow: hidden;
+}
+
+.fortune::after {
+    content: "IQ";
+
+    position: absolute;
+
+    right: -50px;
+    bottom: -115px;
+
+    color: rgba(255, 255, 255, .018);
+
+    font-size: 300px;
+    font-weight: 900;
+
+    letter-spacing: -20px;
+
+    transform: rotate(-12deg);
+
+    pointer-events: none;
+}
+
+
+/* TITLE */
+
+.title {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.title h1 {
+    font-size: clamp(38px, 5vw, 60px);
+    font-weight: 900;
+
+    line-height: .88;
+
+    letter-spacing: -5px;
+}
+
+.title h1 span {
+    color: var(--pink);
+}
+
+.status {
+    padding-top: 5px;
+
+    color: var(--muted);
+
+    font-size: 9px;
+    font-weight: 700;
+
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+
+/* SLOT */
+
+.slot-wrap {
+    width: min(680px, 100%);
+
+    margin: 55px auto 28px;
+}
+
+.slot {
+    position: relative;
+
+    display: grid;
+    place-items: center;
+
+    min-height: 195px;
+
+    overflow: hidden;
+
+    border: 1px solid rgba(255, 255, 255, .11);
+    border-radius: 30px;
+
+    background:
+        radial-gradient(
+            circle at 50% 50%,
+            rgba(155, 92, 255, .09),
+            transparent 65%
+        ),
+        rgba(255, 255, 255, .025);
+
+    box-shadow:
+        inset 0 0 60px rgba(155, 92, 255, .05),
+        0 0 70px rgba(155, 92, 255, .04);
+}
+
+
+/* сканирующая линия */
+
+.slot::before {
+    content: "";
+
+    position: absolute;
+
+    left: -20%;
+    top: -100px;
+
+    width: 140%;
+    height: 2px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            var(--cyan),
+            transparent
+        );
+
+    opacity: .3;
+
+    pointer-events: none;
+}
+
+.spinning.slot::before {
+    animation: scan 0.7s linear infinite;
+}
+
+@keyframes scan {
+    from {
+        transform: translateY(-40px);
+    }
+
+    to {
+        transform: translateY(300px);
+    }
+}
+
+
+/* RESULT */
+
+.result {
+    position: relative;
+    z-index: 2;
+
+    text-align: center;
+}
+
+.result-symbol {
+    min-width: 180px;
+
+    color: white;
+
+    font-size: clamp(60px, 10vw, 94px);
+    font-weight: 900;
+
+    line-height: 1;
+
+    letter-spacing: -7px;
+
+    text-shadow:
+        0 0 35px rgba(155, 92, 255, .25);
+
+    transition: .1s;
+}
+
+.result-text {
+    margin-top: 10px;
+
+    color: var(--muted);
+
+    font-size: 10px;
+    font-weight: 700;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+}
+
+
+/* SPINNING */
+
+.spinning .result-symbol {
+    animation: symbolGlitch .08s linear infinite;
+}
+
+@keyframes symbolGlitch {
+
+    0% {
+        transform: translateX(-2px) skewX(-3deg);
+        filter: blur(0);
+    }
+
+    50% {
+        transform: translateX(3px) skewX(5deg);
+        filter: blur(1px);
+    }
+
+    100% {
+        transform: translateX(-1px) skewX(-2deg);
+        filter: blur(0);
+    }
+}
+
+
+/* BET */
+
+.bet-area {
+    width: min(680px, 100%);
+
+    margin: 0 auto;
+}
+
+.bet-label {
+    display: flex;
+    justify-content: space-between;
+
+    margin-bottom: 8px;
+
+    color: var(--muted);
+
+    font-size: 9px;
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
+}
+
+.bet-row {
+    display: flex;
+
+    gap: 9px;
+}
+
+input {
+    width: 100%;
+    min-width: 0;
+
+    padding: 16px 17px;
+
+    outline: none;
+
+    border: 1px solid var(--border);
+    border-radius: 14px;
+
+    color: white;
+
+    background: rgba(0, 0, 0, .35);
+
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 800;
+
+    transition: .2s;
+}
+
+input:focus {
+    border-color: rgba(155, 92, 255, .7);
+
+    box-shadow:
+        0 0 0 4px rgba(155, 92, 255, .08);
+}
+
+.spin {
+    width: 175px;
+
+    border-radius: 14px;
+
+    color: white;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--purple),
+            var(--pink)
+        );
+
+    font-weight: 900;
+
+    letter-spacing: .5px;
+
+    box-shadow:
+        0 12px 35px rgba(155, 92, 255, .2);
+
+    transition: .15s;
+}
+
+.spin:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 16px 45px rgba(255, 62, 165, .25);
+}
+
+.spin:active {
+    transform: scale(.97);
+}
+
+.spin:disabled {
+    opacity: .45;
+
+    cursor: not-allowed;
+
+    transform: none;
+}
+
+
+/* QUICK BETS */
+
+.quick {
+    display: flex;
+
+    gap: 7px;
+
+    margin-top: 8px;
+}
+
+.quick button {
+    padding: 7px 11px;
+
+    border: 0;
+    border-radius: 9px;
+
+    color: var(--muted);
+
+    background: rgba(255, 255, 255, .05);
+
+    font-family: inherit;
+    font-size: 9px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: .15s;
+}
+
+.quick button:hover {
+    color: white;
+
+    background: rgba(255, 255, 255, .1);
+}
+
+
+/* CHAOS MESSAGE */
+
+.chaos {
+    width: min(680px, 100%);
+
+    margin: 20px auto 0;
+
+    padding: 16px 18px;
+
+    border: 1px solid rgba(255, 255, 255, .055);
+    border-radius: 15px;
+
+    background: rgba(255, 255, 255, .025);
+}
+
+.chaos-title {
+    margin-bottom: 7px;
+
+    color: var(--muted);
+
+    font-size: 8px;
+    font-weight: 700;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+}
+
+.message {
+    font-size: 12px;
+    font-weight: 700;
+
+    line-height: 1.4;
+}
+
+
+/* SIDE */
+
+.side {
+    align-self: start;
+
+    padding: 20px;
+}
+
+.side-title {
+    margin-bottom: 14px;
+
+    color: var(--muted);
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+
+    text-transform: uppercase;
+}
+
+.history {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+.history-item {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 11px 12px;
+
+    border-radius: 12px;
+
+    background: rgba(255, 255, 255, .035);
+
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.history-symbol {
+    font-weight: 900;
+}
+
+.win {
+    color: var(--green);
+}
+
+.loss {
+    color: var(--red);
+}
+
+.neutral {
+    color: var(--yellow);
+}
+
+.empty {
+    padding: 30px 10px;
+
+    color: var(--muted);
+
+    text-align: center;
+
+    font-size: 10px;
+
+    line-height: 1.6;
+}
+
+
+/* EFFECTS */
+
+.win-effect {
+    animation: winEffect .65s ease;
+}
+
+@keyframes winEffect {
+
+    0% {
+        transform: scale(1);
+    }
+
+    25% {
+        transform: scale(1.025) rotate(-1deg);
+    }
+
+    55% {
+        transform: scale(.98) rotate(1deg);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+
+.shake {
+    animation: shake .35s ease;
+}
+
+@keyframes shake {
+
+    0%, 100% {
+        transform: translateX(0);
+    }
+
+    20% {
+        transform: translateX(-9px) rotate(-1deg);
+    }
+
+    40% {
+        transform: translateX(8px) rotate(1deg);
+    }
+
+    60% {
+        transform: translateX(-6px);
+    }
+
+    80% {
+        transform: translateX(4px);
+    }
+}
+
+
+/* JACKPOT */
+
+.jackpot {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+
+    display: grid;
+    place-items: center;
+
+    padding: 20px;
+
+    background: rgba(0, 0, 0, .72);
+
+    backdrop-filter: blur(15px);
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition: .25s;
+}
+
+.jackpot.show {
+    opacity: 1;
+
+    pointer-events: auto;
+}
+
+.jackpot-box {
+    width: min(520px, 100%);
+
+    padding: 45px 30px;
+
+    border: 1px solid rgba(255, 255, 255, .13);
+    border-radius: 30px;
+
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(255, 62, 165, .3),
+            transparent 55%
+        ),
+        #111116;
+
+    text-align: center;
+
+    box-shadow:
+        0 30px 100px rgba(0, 0, 0, .7);
+
+    transform: scale(.8) rotate(-2deg);
+
+    transition:
+        .35s cubic-bezier(.2, 1.4, .4, 1);
+}
+
+.jackpot.show .jackpot-box {
+    transform: scale(1) rotate(0);
+}
+
+.jackpot-box h2 {
+    font-size: 55px;
+    font-weight: 900;
+
+    letter-spacing: -5px;
+}
+
+.jackpot-box p {
+    margin: 10px 0 25px;
+
+    color: var(--muted);
+
+    font-size: 12px;
+
+    line-height: 1.5;
+}
+
+.close {
+    padding: 12px 25px;
+
+    border: 0;
+    border-radius: 12px;
+
+    color: white;
+
+    background: rgba(255, 255, 255, .09);
+
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 800;
+
+    cursor: pointer;
+
+    transition: .15s;
+}
+
+.close:hover {
+    background: rgba(255, 255, 255, .14);
+}
+
+
+/* MOBILE */
+
+@media (max-width: 800px) {
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .side {
+        min-height: 240px;
+    }
+}
+
+
+@media (max-width: 500px) {
+
+    .app {
+        width: calc(100% - 16px);
+
+        padding-top: 14px;
+    }
+
+    header {
+        margin-bottom: 12px;
+    }
+
+    .logo {
+        font-size: 21px;
+    }
+
+    .fortune {
+        min-height: auto;
+
+        padding: 18px;
+
+        border-radius: 19px;
+    }
+
+    .title h1 {
+        font-size: 37px;
+
+        letter-spacing: -3px;
+    }
+
+    .status {
+        display: none;
+    }
+
+    .slot-wrap {
+        margin-top: 35px;
+    }
+
+    .slot {
+        min-height: 170px;
+
+        border-radius: 23px;
+    }
+
+    .bet-row {
+        flex-direction: column;
+    }
+
+    .spin {
+        width: 100%;
+
+        min-height: 52px;
+    }
+
+    .quick {
+        flex-wrap: wrap;
+    }
+
+    .quick button {
+        flex: 1;
+    }
+}
+</style>
+</head>
+
+
+<body>
+
+<div class="app">
+
+    <!-- HEADER -->
+
+    <header>
+
+        <div class="logo">
+            IQ<span>CASINO</span>
+
+            <small>
+                INTELLIGENCE IS TEMPORARY
+            </small>
+        </div>
+
+
+        <div class="balance">
+
+            <div class="balance-label">
+                YOUR IQ
+            </div>
+
+            <div
+                class="balance-value"
+                id="balance"
+            >
+                100 IQ
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- MAIN -->
+
+    <main class="grid">
+
+
+        <!-- FORTUNE -->
+
+        <section class="card fortune">
+
+            <div class="title">
+
+                <h1>
+                    ФОРТУНА<br>
+                    <span>IQ.</span>
+                </h1>
+
+                <div
+                    class="status"
+                    id="status"
+                >
+                    система стабильна
+                </div>
+
+            </div>
+
+
+            <!-- SLOT -->
+
+            <div class="slot-wrap">
+
+                <div
+                    class="slot"
+                    id="slot"
+                >
+
+                    <div class="result">
+
+                        <div
+                            class="result-symbol"
+                            id="symbol"
+                        >
+                            ?
+                        </div>
+
+                        <div
+                            class="result-text"
+                            id="resultText"
+                        >
+                            сделай ставку
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- BET -->
+
+            <div class="bet-area">
+
+                <div class="bet-label">
+
+                    <span>
+                        СТАВКА
+                    </span>
+
+                    <span>
+                        1 — весь IQ
+                    </span>
+
+                </div>
+
+
+                <div class="bet-row">
+
+                    <input
+                        id="bet"
+                        type="number"
+                        min="1"
+                        step="1"
+                        value="10"
+                        placeholder="Сколько IQ?"
+                    >
+
+
+                    <button
+                        class="spin"
+                        id="spin"
+                        type="button"
+                    >
+                        КРУТИТЬ
+                    </button>
+
+                </div>
+
+
+                <div class="quick">
+
+                    <button
+                        type="button"
+                        data-bet="10"
+                    >
+                        10
+                    </button>
+
+                    <button
+                        type="button"
+                        data-bet="25"
+                    >
+                        25
+                    </button>
+
+                    <button
+                        type="button"
+                        data-bet="50"
+                    >
+                        50
+                    </button>
+
+                    <button
+                        type="button"
+                        data-bet="100"
+                    >
+                        ALL IN
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- CHAOS MESSAGE -->
+
+            <div class="chaos">
+
+                <div class="chaos-title">
+                    состояние системы
+                </div>
+
+                <div
+                    class="message"
+                    id="message"
+                >
+                    Система готова. Это уже подозрительно.
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- HISTORY -->
+
+        <aside class="card side">
+
+            <div class="side-title">
+                последние события
+            </div>
+
+
+            <div
+                class="history"
+                id="history"
+            >
+
+                <div class="empty">
+
+                    Пока ничего.<br>
+
+                    Ты ещё не проиграл.
+
+                </div>
+
+            </div>
+
+        </aside>
+
+
+    </main>
+
+</div>
+
+
+<!-- JACKPOT -->
+
+<div
+    class="jackpot"
+    id="jackpot"
+>
+
+    <div class="jackpot-box">
+
+        <h2>
+            JACKPOT
+        </h2>
+
+        <p id="jackpotText">
+            Невероятно.
+        </p>
+
+        <button
+            class="close"
+            id="closeJackpot"
+            type="button"
+        >
+            продолжить разрушение IQ
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =========================================
+   IQ CASINO
+   GAME LOGIC
+========================================= */
+
+
+let iq = 100;
+
+let spinning = false;
+
+
+/* ELEMENTS */
+
+const balance =
+    document.getElementById("balance");
+
+const betInput =
+    document.getElementById("bet");
+
+const spinButton =
+    document.getElementById("spin");
+
+const symbol =
+    document.getElementById("symbol");
+
+const resultText =
+    document.getElementById("resultText");
+
+const slot =
+    document.getElementById("slot");
+
+const message =
+    document.getElementById("message");
+
+const status =
+    document.getElementById("status");
+
+const history =
+    document.getElementById("history");
+
+const jackpot =
+    document.getElementById("jackpot");
+
+const jackpotText =
+    document.getElementById("jackpotText");
+
+const closeJackpot =
+    document.getElementById("closeJackpot");
+
+
+/* =========================================
+   OUTCOMES
+========================================= */
+
+const outcomes = [
+
+    {
+        symbol: "x0",
+        text: "IQ исчезло",
+        multiplier: 0,
+        weight: 30,
+        type: "loss"
+    },
+
+    {
+        symbol: "x0.5",
+        text: "мозг работает наполовину",
+        multiplier: 0.5,
+        weight: 18,
+        type: "loss"
+    },
+
+    {
+        symbol: "x1",
+        text: "ничего не произошло",
+        multiplier: 1,
+        weight: 18,
+        type: "neutral"
+    },
+
+    {
+        symbol: "x1.5",
+        text: "подозрительно неплохо",
+        multiplier: 1.5,
+        weight: 13,
+        type: "win"
+    },
+
+    {
+        symbol: "x2",
+        text: "мозг обнаружен",
+        multiplier: 2,
+        weight: 10,
+        type: "win"
+    },
+
+    {
+        symbol: "x3",
+        text: "ты слишком умный",
+        multiplier: 3,
+        weight: 6,
+        type: "win"
+    },
+
+    {
+        symbol: "x5",
+        text: "что вообще происходит",
+        multiplier: 5,
+        weight: 3,
+        type: "win"
+    },
+
+    {
+        symbol: "IQ?",
+        text: "СИСТЕМА НЕ ЗНАЕТ",
+        multiplier: 7,
+        weight: 1.5,
+        type: "win"
+    },
+
+    {
+        symbol: "∞",
+        text: "ты сломал математику",
+        multiplier: 10,
+        weight: 0.5,
+        type: "jackpot"
+    }
+
+];
+
+
+/* =========================================
+   RANDOM MESSAGES
+========================================= */
+
+const chaosMessages = [
+
+    "Система делает вид, что всё под контролем.",
+
+    "IQ — это просто число.",
+
+    "Где-то сейчас один нейрон удивился.",
+
+    "Ставка принята.",
+
+    "Очень научный метод.",
+
+    "Вероятность существует. Где-то.",
+
+    "Система слегка обеспокоена.",
+
+    "Ты сейчас буквально азартный математик.",
+
+    "Это было решение.",
+
+    "IQ проверяется...",
+
+    "Математика сегодня на твоей стороне.",
+
+    "Не спрашивай, почему это работает."
+
+];
+
+
+/* =========================================
+   UPDATE BALANCE
+========================================= */
+
+function updateBalance() {
+
+    balance.textContent =
+        Math.floor(iq) + " IQ";
+
+
+    if (iq <= 0) {
+
+        balance.style.color =
+            "var(--red)";
+
+    } else if (iq >= 500) {
+
+        balance.style.color =
+            "var(--green)";
+
+    } else {
+
+        balance.style.color =
+            "var(--yellow)";
+    }
+
+}
+
+
+/* =========================================
+   RANDOM OUTCOME
+========================================= */
+
+function getOutcome() {
+
+    const totalWeight =
+        outcomes.reduce(
+            (total, outcome) =>
+                total + outcome.weight,
+            0
+        );
+
+
+    let random =
+        Math.random() * totalWeight;
+
+
+    for (const outcome of outcomes) {
+
+        random -= outcome.weight;
+
+
+        if (random <= 0) {
+
+            return outcome;
+
+        }
+
+    }
+
+
+    return outcomes[0];
+}
+
+
+/* =========================================
+   RANDOM MESSAGE
+========================================= */
+
+function randomChaosMessage() {
+
+    const index =
+        Math.floor(
+            Math.random() *
+            chaosMessages.length
+        );
+
+
+    message.textContent =
+        chaosMessages[index];
+}
+
+
+/* =========================================
+   HISTORY
+========================================= */
+
+function addHistory(
+    outcome,
+    netChange
+) {
+
+    const empty =
+        history.querySelector(".empty");
+
+
+    if (empty) {
+        empty.remove();
+    }
+
+
+    const item =
+        document.createElement("div");
+
+
+    item.className =
+        "history-item";
+
+
+    let text;
+
+
+    if (netChange > 0) {
+
+        text =
+            "+" +
+            Math.floor(netChange) +
+            " IQ";
+
+    } else if (netChange < 0) {
+
+        text =
+            Math.floor(netChange) +
+            " IQ";
+
+    } else {
+
+        text =
+            "±0 IQ";
+    }
+
+
+    item.innerHTML = `
+
+        <span class="history-symbol">
+            ${outcome.symbol}
+        </span>
+
+        <span class="${outcome.type}">
+            ${text}
+        </span>
+
+    `;
+
+
+    history.prepend(item);
+
+
+    while (history.children.length > 7) {
+
+        history.lastElementChild.remove();
+
+    }
+
+}
+
+
+/* =========================================
+   MAIN SPIN
+========================================= */
+
+function doSpin() {
+
+    /*
+        Защита от двойного нажатия.
+    */
+
+    if (spinning) {
+        return;
+    }
+
+
+    let bet =
+        Number(betInput.value);
+
+
+    /*
+        Проверка ставки.
+    */
+
+    if (
+        !Number.isFinite(bet) ||
+        bet < 1
+    ) {
+
+        message.textContent =
+            "Введи нормальную ставку. Хотя бы 1 IQ.";
+
+        betInput.focus();
+
+        return;
+    }
+
+
+    /*
+        Только целые IQ.
+    */
+
+    bet =
+        Math.floor(bet);
+
+
+    /*
+        Слишком большая ставка.
+    */
+
+    if (bet > iq) {
+
+        message.textContent =
+            "У тебя недостаточно IQ. Классика.";
+
+        slot.classList.remove("shake");
+
+        void slot.offsetWidth;
+
+        slot.classList.add("shake");
+
+        return;
+    }
+
+
+    /*
+        START
+    */
+
+    spinning = true;
+
+    spinButton.disabled = true;
+
+
+    /*
+        Забираем ставку.
+    */
+
+    iq -= bet;
+
+    updateBalance();
+
+
+    status.textContent =
+        "система думает";
+
+    resultText.textContent =
+        "анализ вероятностей...";
+
+
+    randomChaosMessage();
+
+
+    slot.classList.add("spinning");
+
+
+    /*
+        Фальшивая прокрутка.
+    */
+
+    const animation =
+        setInterval(() => {
+
+            const fake =
+                outcomes[
+                    Math.floor(
+                        Math.random() *
+                        outcomes.length
+                    )
+                ];
+
+
+            symbol.textContent =
+                fake.symbol;
+
+        }, 75);
+
+
+    /*
+        Останавливаем через 1.7 сек.
+    */
+
+    setTimeout(() => {
+
+        clearInterval(animation);
+
+
+        /*
+            Настоящий результат.
+        */
+
+        const outcome =
+            getOutcome();
+
+
+        /*
+            Сколько получили обратно.
+        */
+
+        const payout =
+            bet * outcome.multiplier;
+
+
+        /*
+            Чистая прибыль / убыток.
+        */
+
+        const netChange =
+            payout - bet;
+
+
+        /*
+            Добавляем выигрыш.
+        */
+
+        iq += payout;
+
+        updateBalance();
+
+
+        /*
+            Показываем результат.
+        */
+
+        symbol.textContent =
+            outcome.symbol;
+
+        resultText.textContent =
+            outcome.text;
+
+
+        slot.classList.remove(
+            "spinning"
+        );
+
+
+        status.textContent =
+            outcome.type === "jackpot"
+                ? "КРИТИЧЕСКАЯ ОШИБКА"
+                : "система стабильна";
+
+
+        /*
+            WIN
+        */
+
+        if (
+            outcome.type === "win"
+        ) {
+
+            slot.classList.remove(
+                "win-effect"
+            );
+
+            void slot.offsetWidth;
+
+            slot.classList.add(
+                "win-effect"
+            );
+
+
+            message.textContent =
+                "+" +
+                Math.floor(netChange) +
+                " IQ. Не привыкай.";
+
+        }
+
+
+        /*
+            JACKPOT
+        */
+
+        else if (
+            outcome.type === "jackpot"
+        ) {
+
+            slot.classList.remove(
+                "win-effect"
+            );
+
+            void slot.offsetWidth;
+
+            slot.classList.add(
+                "win-effect"
+            );
+
+
+            message.textContent =
+                "Ты только что сломал статистику.";
+
+
+            setTimeout(() => {
+
+                jackpotText.textContent =
+                    "Ставка " +
+                    bet +
+                    " IQ превратилась в " +
+                    Math.floor(payout) +
+                    " IQ. Это было крайне подозрительно.";
+
+
+                jackpot.classList.add(
+                    "show"
+                );
+
+            }, 300);
+
+        }
+
+
+        /*
+            LOSS
+        */
+
+        else if (
+            outcome.type === "loss"
+        ) {
+
+            slot.classList.remove(
+                "shake"
+            );
+
+            void slot.offsetWidth;
+
+            slot.classList.add(
+                "shake"
+            );
+
+
+            message.textContent =
+                Math.floor(
+                    Math.abs(netChange)
+                ) +
+                " IQ исчезло. Мозг слегка недоволен.";
+
+        }
+
+
+        /*
+            NOTHING
+        */
+
+        else {
+
+            message.textContent =
+                "Ты поставил IQ и получил столько же. Гениально.";
+
+        }
+
+
+        /*
+            HISTORY
+        */
+
+        addHistory(
+            outcome,
+            netChange
+        );
+
+
+        /*
+            END
+        */
+
+        spinning = false;
+
+        spinButton.disabled = false;
+
+
+        /*
+            ZERO IQ
+        */
+
+        if (iq <= 0) {
+
+            message.textContent =
+                "IQ закончился. Абсолютный ноль достигнут.";
+
+            status.textContent =
+                "мозг offline";
+
+        }
+
+    }, 1700);
+
+}
+
+
+/* =========================================
+   SPIN BUTTON
+========================================= */
+
+spinButton.addEventListener(
+    "click",
+    doSpin
+);
+
+
+/* =========================================
+   ENTER
+========================================= */
+
+betInput.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (event.key === "Enter") {
+
+            doSpin();
+
+        }
+
+    }
+);
+
+
+/* =========================================
+   QUICK BETS
+========================================= */
+
+document
+    .querySelectorAll(".quick button")
+    .forEach(button => {
+
+        button.addEventListener(
+            "click",
+            function() {
+
+                const value =
+                    this.dataset.bet;
+
+
+                /*
+                    ALL IN
+                */
+
+                if (value === "100") {
+
+                    betInput.value =
+                        Math.max(
+                            1,
+                            Math.floor(iq)
+                        );
+
+                    return;
+                }
+
+
+                /*
+                    Обычная ставка
+                */
+
+                betInput.value =
+                    Math.min(
+                        Number(value),
+                        Math.max(
+                            1,
+                            Math.floor(iq)
+                        )
+                    );
+
+            }
+        );
+
+    });
+
+
+/* =========================================
+   CLOSE JACKPOT
+========================================= */
+
+closeJackpot.addEventListener(
+    "click",
+    function() {
+
+        jackpot.classList.remove(
+            "show"
+        );
+
+    }
+);
+
+
+/* =========================================
+   INITIALIZE
+========================================= */
+
+updateBalance();
+
+</script>
+
+</body>
+</html>
